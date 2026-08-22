@@ -21,13 +21,27 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       // Enhancement 3: dark/light mode switch
-      body: SwitchListTile(
-        title: CustomText(
-          text: themeProvider.isDark ? 'Light Mode' : 'Dark Mode',
-          fontSize: 16.sp,
+      body: Padding(
+        padding: EdgeInsets.all(16.r),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          child: SwitchListTile(
+            secondary: Icon(
+              themeProvider.isDark ? Icons.dark_mode : Icons.light_mode,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            title: CustomText(
+              text: themeProvider.isDark ? 'Light Mode' : 'Dark Mode',
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+            ),
+            value: themeProvider.isDark,
+            onChanged: (_) => context.read<ThemeProvider>().toggleTheme(),
+          ),
         ),
-        value: themeProvider.isDark,
-        onChanged: (_) => context.read<ThemeProvider>().toggleTheme(),
       ),
     );
   }

@@ -52,12 +52,16 @@ class _ProductScreenState extends State<ProductScreen> {
               width: ScreenUtil().screenWidth,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(),
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(24.r),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.search, size: 20.sp),
+                  Icon(
+                    Icons.search,
+                    size: 20.sp,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                   SizedBox(width: 8.w),
                   Expanded(
                     child: TextField(
@@ -67,7 +71,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         border: InputBorder.none,
                         isDense: true,
                         contentPadding: EdgeInsets.symmetric(vertical: 12.h),
-                        hintText: 'Search',
+                        hintText: 'Search products',
                       ),
                     ),
                   ),
@@ -129,10 +133,10 @@ class _ProductScreenState extends State<ProductScreen> {
                   itemBuilder: (context, index) {
                     final product = products[index];
                     return Card(
-                      elevation: 2,
+                      elevation: 1,
                       clipBehavior: Clip.antiAlias,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(16.r),
                       ),
                       // Enhancement 2: open the details page when a card is tapped
                       child: InkWell(
@@ -173,6 +177,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                         '\$${product.price.toStringAsFixed(2)}',
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w600,
+                                    textColor: Theme.of(context).colorScheme.primary,
                                   ),
                                 ],
                               ),
