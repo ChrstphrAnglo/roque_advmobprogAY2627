@@ -1,0 +1,27 @@
+name: roque_advmobprog
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_dotenv: ^5.2.1
+  flutter_screenutil: ^5.9.3
+  google_fonts: ^6.2.1
+  http: ^1.5.0
+  provider: ^6.1.5+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  assets:
+    - assets/
+    - assets/images/
+  uses-material-design: true
