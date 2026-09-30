@@ -13,7 +13,10 @@ class CustomText extends StatelessWidget {
     this.fontStyle = FontStyle.normal,
     this.maxLines,
     this.overflow,
+    this.color,
   });
+
+  final Color? color;
 
   final String text;
   final double fontSize, letterSpacing;
@@ -36,6 +39,7 @@ class CustomText extends StatelessWidget {
         fontWeight: fontWeight,
         fontStyle: fontStyle,
         letterSpacing: letterSpacing,
+        color: color,
       ),
     );
   }

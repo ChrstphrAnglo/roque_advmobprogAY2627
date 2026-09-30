@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "330833148559",
+    "project_id": "roque-advmobprog-firebase",
+    "storage_bucket": "roque-advmobprog-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330833148559:android:08754d30189275a16bcefa",
+        "android_client_info": {
+          "package_name": "com.example.roque_advmobprog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBK9OB8cSNZg99QRr_IUubHOWTMnWQADE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

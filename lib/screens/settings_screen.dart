@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/theme_provider.dart';
+import '../utils/logout.dart';
 import '../widgets/custom_text.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -21,13 +22,22 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       // Enhancement 3: dark/light mode switch
-      body: SwitchListTile(
-        title: CustomText(
-          text: themeProvider.isDark ? 'Light Mode' : 'Dark Mode',
-          fontSize: 16.sp,
-        ),
-        value: themeProvider.isDark,
-        onChanged: (_) => context.read<ThemeProvider>().toggleTheme(),
+      body: ListView(
+        children: [
+          SwitchListTile(
+            title: CustomText(
+              text: themeProvider.isDark ? 'Light Mode' : 'Dark Mode',
+              fontSize: 16.sp,
+            ),
+            value: themeProvider.isDark,
+            onChanged: (_) => context.read<ThemeProvider>().toggleTheme(),
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: CustomText(text: 'Log out', fontSize: 16.sp),
+            onTap: () => confirmLogout(context),
+          ),
+        ],
       ),
     );
   }

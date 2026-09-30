@@ -1,13 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product.dart';
+import '../providers/cart_provider.dart';
 import '../widgets/custom_text.dart';
 
-// Enhancement 2: details page shown when a product card is tapped
-class ProductDetailScreen extends StatelessWidget {
+// Enhancement 2 (earlier lab): details page shown when a product card is tapped.
+// Enhancement 1 (this lab): the cart screen opens this same screen for its items.
+class DetailScreen extends StatefulWidget {
   final Product product;
-  const ProductDetailScreen({super.key, required this.product});
+  const DetailScreen({super.key, required this.product});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  bool _adding = false;
+
+  Product get product => widget.product;
+
+  // Enhancement 3: pass the product's values to the cart (POST /carts/add).
+  Future<void> _addToCart() async {
+    setState(() => _adding = true);
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      await context.read<CartProvider>().addProduct(product);
+      messenger
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text('${product.title} added to your cart')));
+    } catch (_) {
+      messenger
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(content: Text('Could not add to cart. Check your connection and try again.')),
+        );
+    } finally {
+      if (mounted) setState(() => _adding = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +49,8 @@ class ProductDetailScreen extends StatelessWidget {
           text: product.title,
           fontSize: 18.sp,
           fontWeight: FontWeight.w600,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: SingleChildScrollView(
@@ -80,6 +114,22 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 12.h),
+          child: FilledButton.icon(
+            onPressed: _adding ? null : _addToCart,
+            icon: _adding
+                ? SizedBox(
+                    height: 18.h,
+                    width: 18.h,
+                    child: const CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.add_shopping_cart),
+            label: const Text('Add to cart'),
+          ),
         ),
       ),
     );
